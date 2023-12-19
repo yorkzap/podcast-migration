@@ -1,69 +1,57 @@
 #!/bin/bash
 
-# Path to the file containing post IDs
-POST_ID_FILE="posts_id.txt"
-
-# Store the original directory
-ORIGINAL_DIR=$(pwd)
-echo "Original Directory: $ORIGINAL_DIR" # Debug line
-
-# JSON file to store the results
-JSON_FILE="$ORIGINAL_DIR/post_details.json"
-echo "Writing to $JSON_FILE" # Debug line
-
-# Check if POST_ID_FILE exists
-if [ ! -f "$POST_ID_FILE" ]; then
-    echo "Post ID file not found: $POST_ID_FILE" # Debug line
-    exit 1
-fi
-
-# Start the JSON array
-echo "[" > "$JSON_FILE"
-if [ $? -ne 0 ]; then
-    echo "Failed to write to $JSON_FILE" # Debug line
-    exit 1
-fi
-
-# Variable to handle comma separation in JSON
-first_entry=true
+# Define the CSV file to store the results
+CSV_FILE="/home/u100-emjg4pwrmcun/www/staging17.podcast.susanmcvea.com/public_html/podcast-migration/post_details.csv"
+TEMP_FILE="/home/u100-emjg4pwrmcun/www/staging17.podcast.susanmcvea.com/public_html/podcast-migration/temp_post_details.csv"
 
 # Change directory to the WordPress installation
 cd ~/www/staging17.podcast.susanmcvea.com/public_html
-echo "Changed directory to $(pwd)" # Debug line
+echo "Changed directory to $(pwd)"
 
-# Loop through each post ID in the file
-while read -r post_id; do 
-    echo "Processing Post ID: $post_id" # Debug line
+# Fetch all post IDs including all types and statuses
+post_ids=$(wp post list --post_type=any --post_status=any --format=ids --posts_per_page=-1)
 
-    # Fetch the title and permalink of the post
-    title=$(wp post get "$post_id" --field=post_title | sed 's/"/\\"/g')
+# Create a temporary file and add headers
+echo "Post ID,Title,Link,Libsyn Iframe" > "$TEMP_FILE"
+
+# Initialize the iterator
+iteration=0
+
+# Loop through each post ID
+for post_id in $post_ids; do 
+    ((iteration++))
+    echo "Processing iteration $iteration: Post ID $post_id"
+
+    # Fetch the title, permalink, and content of the post
+    title=$(wp post get "$post_id" --field=post_title)
     permalink=$(wp post list --post__in="$post_id" --post_type=post --field=url)
+    content=$(wp post get "$post_id" --field=content --skip-plugins --skip-themes)
 
-    # Add a comma before each entry after the first
-    if [ "$first_entry" = true ]; then
-        first_entry=false
+    # Extract the Libsyn iframe (either format)
+    libsyn_iframe=$(echo "$content" | grep -o -E '<iframe[^>]*src="(//html5-player.libsyn.com/embed/episode/id/[^>]*|https://play.libsyn.com/embed/episode/id/[^>]*height/192[^>]*)></iframe>')
+
+    # Handle posts without Libsyn iframes
+    if [ -z "$libsyn_iframe" ]; then
+        echo "No Libsyn Iframe found for Post ID $post_id. Including post with empty iframe field..."
+        libsyn_iframe="N/A" # Or use any placeholder you prefer
+        echo "Iteration $iteration: Post ID $post_id - Unmatched Link"
     else
-        echo "," >> "$JSON_FILE"
+        libsyn_iframe=$(echo "$libsyn_iframe" | sed 's/"/""/g')
+        echo "Iteration $iteration: Post ID $post_id - Matched Link"
     fi
 
-    # Append the post details to JSON file
-    echo "{\"Post ID\": \"$post_id\", \"Title\": \"$title\", \"Link\": \"$permalink\"}" >> "$JSON_FILE"
-    if [ $? -ne 0 ]; then
-        echo "Failed to append data for Post ID $post_id to $JSON_FILE" # Debug line
-    fi
-
-    # Print the post ID, title, and permalink
-    echo "Post ID: $post_id"
+    # Print details being written to CSV file
+    echo "Details for iteration $iteration: Post ID $post_id"
     echo "Title: $title"
     echo "Link: $permalink"
-    echo ""
-done < "$ORIGINAL_DIR/$POST_ID_FILE"
+    echo "Libsyn Iframe: $libsyn_iframe"
 
-# End the JSON array
-echo "]" >> "$JSON_FILE"
-if [ $? -ne 0 ]; then
-    echo "Failed to finalize $JSON_FILE" # Debug line
-    exit 1
-fi
+    # Append the post details to the temporary file
+    echo "$post_id,\"$title\",\"$permalink\",\"$libsyn_iframe\"" >> "$TEMP_FILE"
+done
 
-echo "Script execution completed." # Debug line
+# Move the temporary file to the final CSV file
+mv "$TEMP_FILE" "$CSV_FILE"
+echo "Data written to $CSV_FILE"
+
+echo "Script execution completed."
