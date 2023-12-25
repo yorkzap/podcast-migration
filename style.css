@@ -1,0 +1,13 @@
+/* Remove gap between podcast banner and the iframe */
+
+/* Remove top and bottom padding from the specific row */
+.et_pb_row.et_pb_row_1 {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* If the gap is due to margins on the modules within the row */
+.et_pb_row.et_pb_row_1 .et_pb_module {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
