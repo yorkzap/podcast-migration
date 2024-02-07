@@ -68,7 +68,7 @@ Version: 1.0.0
 
 .podcast-divider {
     height: 2px;
-    background: #FFD700;
+    background: #E0BD63;
     width: 3rem;
     margin: 1rem auto;
     border-radius: 1px;
@@ -316,14 +316,14 @@ Version: 1.0.0
 
 .podcast-divider {
     height: 3px; /* Slightly thicker for emphasis */
-    background: #FFD700;
+    background: #E0BD63;
     width: 60px; /* Longer to stand out more */
     margin: 20px auto; /* More whitespace around the divider */
     border-radius: 1px;
 }
 
 .podcast-listen-button {
-    background-color: #FFD700;
+    background-color: #E0BD63;
     color: #0A1E39;
     padding: 10px 25px; /* Slightly reduced for balance */
     border-radius: 25px;
@@ -373,7 +373,7 @@ Version: 1.0.0
 }
 
 .podcast-divider {
-    background: #FFD700; /* Solid color for clarity */
+    background: #E0BD63; /* Solid color for clarity */
     width: 50px; /* Short and wide for a modern look */
     height: 4px; /* Thicker for visibility */
     margin-bottom: 24px; /* More space to the title */
@@ -454,13 +454,17 @@ Version: 1.0.0
 
 
 
-body, h1, .next-text {
+h1, .next-text {
   margin: 0;
   padding: 0;
-  font-family: 'San Francisco', 'Helvetica Neue', Arial, sans-serif; /* San Francisco is the macOS system font */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  background: #f0f0f0;
+  font-family: 'San Francisco', 'Helvetica Neue', Arial, sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #ffffff;
   color: #1a1a1a;
+  line-height: 1.4; /* Adjust this value as needed */
+  box-sizing: border-box;
+  bac
 }
 
 .with-text {
@@ -490,7 +494,7 @@ body, h1, .next-text {
 }
 
 .podcast-title {
-  background-color: rgba(255, 215, 0, 0.85); /* Semi-transparent yellow */
+  background-color: rgba(224, 189, 99, 0.85); /* Semi-transparent yellow */
   padding: 1.5rem;
   border-radius: 4px;
   font-size: 4rem;
@@ -502,6 +506,10 @@ body, h1, .next-text {
   display: block; /* Use block to utilize the full width of header-text */
   margin-top: 4rem; /* Adjust the top margin */
   margin-bottom: 1rem; /* Space between the title and the host */
+  
+  /* Frosted glass effect */
+  backdrop-filter: blur(10px); /* Blurring the background */
+  -webkit-backdrop-filter: blur(10px); /* For Safari browser compatibility */
 }
 
 
@@ -559,7 +567,7 @@ body, h1, .next-text {
   transform: translate(-50%, -50%);
   padding: 20px 40px; /* More horizontal padding for a wider appearance */
   position: absolute; /* Absolute position for the header text */
-  background-color: #E0BE63; /* Solid yellow background */
+  background-color: #E0BD63; /* Solid yellow background */
   z-index: 2; /* Ensure it's above the image */
   border-radius: 50px;
 }
@@ -790,16 +798,37 @@ body, h1, .next-text {
   }
 } 
 
+
 /* Style the container of the iframe for a macOS-inspired look */
 #player {
-    background-color: #f0f0f0; /* Light grey background, common in macOS interfaces */
-    padding: 1em; /* Padding to provide space around the iframe */
-    border-radius: 8px; /* Rounded corners for a sleek look */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    margin-top: 2em; /* Space above the player for separation from other content */
-    margin-bottom: 2em; /* Space below the player */
-    overflow: hidden; /* Hide any overflow to maintain the rounded corners */
+  background-color: #f0f0f0; /* Light grey background, common in macOS interfaces */
+  padding: 20px; /* Increase padding for more space around the iframe */
+  border-radius: 12px; /* Rounded corners for a sleek look */
+  box-shadow: 0 4px 20px rgba(10, 30, 57, 0.2); /* Soft shadow with a hint of the accent color */
+  gap: 50px;
+  margin-bottom: 20px; /* Increase space below the player */
+  overflow: hidden; /* Hide any overflow to maintain the rounded corners */
+  text-align: center; /* Center align the content within the player */
+  font-family: 'San Francisco', 'Helvetica Neue', Arial, sans-serif; /* Use a system font for a clean, Apple-like style */
+  color: #1a1a1a; /* Use a soft black for text legibility */
+  line-height: 1.6; /* Optimal line height for readability */
+  max-width: 75%; /* Limit the maximum width */
+  margin-left: auto !important; /* Center align the player container */
+  margin-right: auto !important; /* Center align the player container */
+  display: block; /* Ensure it's a block-level element */
 }
+
+/* Style the iframe element to remove borders and ensure it fits well */
+#player iframe {
+  display: block; /* Remove extra space below the iframe */
+  width: 100%; /* Full width of its container */
+  height: 90px; /* Adjust the height as needed */
+  border: none; /* Remove the border */
+}
+
+
+
+
 
 /* Style the iframe element to remove borders and ensure it fits well */
 #player iframe {
@@ -855,7 +884,7 @@ body, h1, .next-text {
 }
 
 /* Consistent font styling */
-body, h1, h2, h3, p {
+body, h1, h2, h3 {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     color: #333; /* Dark grey text for readability */
 }
@@ -875,8 +904,263 @@ body, h1, h2, h3, p {
 }
 
 /* Additional styles for a clean look */
-.divider {
-    height: 1px;
-    background-color: #e1e4e8; /* Subtle divider color */
-    margin: 20px 0;
+/* Base style for the post content area with a MacOS inspired aesthetic */
+.post-body-content {
+  max-width: 75%; /* Increased width for a broader content area */
+  margin: -3rem auto 3rem; /* Negative margin for a smooth overlap */
+  padding: 60px; /* Increased padding for additional whitespace */
+  background: #ffffff; /* Clean white background */
+  border-radius: 12px; /* Subtle rounded corners */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05); /* Soft shadow for depth, akin to macOS */
+  font-family: 'San Francisco', 'Helvetica Neue', Arial, sans-serif; /* System font for macOS */
+  color: #1a1a1a; /* Soft black for legibility */
+  line-height: 1.6; /* Optimal line height for reading */
+  overflow: hidden; /* Clipping anything outside the border-radius */
+  opacity: 0; /* Initial state - content is invisible */
+  transform: translateY(30px); /* Start slightly lower for the animation */
+  animation: fadeInUp 0.8s ease forwards 0.3s; /* Animation to fade in and slide up */
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Style for main headings to stand out */
+.post-body-content .main-heading {
+  font-size: 2.5rem; /* Increased font size for more prominence */
+  color: #0A1E39; /* A classic MacOS vibrant blue */
+  margin-top: 0; /* Aligning top with the content padding */
+  margin-bottom: 2rem; /* 32px for a clear separation from content */
+  font-weight: bold; /* Bold to stand out */
+  text-align: center; /* Centered for importance */
+  letter-spacing: 0.5px; /* Slight spacing for an airy feel */
+  line-height: 1.2; /* Decreased line height to prevent vertical scrolling */
+  background: inherit;
+}
+
+/* Subtle style for subheadings, keeping in theme with MacOS design */
+.post-body-content .sub-sub-heading {
+  font-size: 1.75rem; /* Increased font size for subheadings */
+  color: #3e4a59; /* Darker grey for subtlety */
+  margin-top: 2rem; /* Increased top margin for rhythm */
+  margin-bottom: 1rem; /* Sufficient space below for separation */
+  font-weight: normal; /* Not too bold to differentiate from the main heading */
+  text-align: left; /* Left align for a clean start of sections */
+  border-bottom: 2px solid #dce3eb; /* Light border for a division, typical in macOS */
+  padding-bottom: 0.5rem; /* 8px padding for space above the border */
+}
+
+/* Paragraphs styled for easy reading, reflecting MacOS's emphasis on user experience */
+.post-body-content .blog-paragraph {
+  font-size: 1rem; /* 16px for comfort */
+  margin-bottom: 1.5rem; /* 24px for clean separation between paragraphs */
+  text-align: left; /* Left-aligned for consistency and ease of reading */
+}
+
+/* Responsive design for a seamless transition between devices */
+@media (max-width: 768px) {
+  .post-body-content {
+    max-width: 90%; /* Full width with a little margin */
+    padding: 30px; /* Reduced padding on smaller screens */
+    margin: 40px auto; /* Less vertical margin on smaller devices */
+    animation: none; /* No animation on smaller screens */
+  }
+  
+  .post-body-content .main-heading,
+  .post-body-content .sub-sub-heading {
+    text-align: center; /* Centered text on smaller screens for balance */
+  }
+}
+
+.podcast-series {
+  font-size: 1.5rem;
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+  .post-body-content {
+    max-width: 100%; /* Full width for mobile screens */
+    margin: 1rem auto; /* Top and bottom margin for spacing */
+    padding: 20px; /* Slightly less padding for space efficiency */
+    box-shadow: none; /* Remove shadow for a flatter design */
+    animation: none; /* No animation to keep it simple */
+    transform: none; /* No transform to prevent movement */
+    opacity: 1; /* Content is fully visible */
+  }
+
+  .post-body-content .main-heading,
+  .post-body-content .sub-sub-heading,
+  .post-body-content .blog-paragraph {
+    text-align: left; /* Align text to the left for simplicity */
+    margin-top: 1rem; /* Uniform top margin for spacing */
+    margin-bottom: 1rem; /* Uniform bottom margin for spacing */
+    font-size: 1rem; /* Standard font size for mobile legibility */
+    line-height: 1.4; /* Slightly tighter line-height for mobile screens */
+    border-bottom: none; /* Remove borders from subheadings */
+    padding-bottom: 0; /* Remove padding from subheadings */
+  }
+
+  /* Ensure headings are not too large on small screens */
+  .post-body-content .main-heading {
+    font-size: 1.5rem; /* Smaller font size for main headings */
+    margin-bottom: 1.5rem; /* Spacing after the main heading */
+  }
+
+  .post-body-content .sub-sub-heading {
+    font-size: 1.25rem; /* Smaller font size for subheadings */
+  }
+}
+
+
+h1-class, h2-class, h3-class, h4-class, h5-class, h6-class {
+  color: #0a1e39;
+  margin-top: 1em;
+}
+
+h1-class {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+
+h2-class {
+  font-size: 1.75em;
+  border-bottom: 2px solid #0a1e39;
+  padding-bottom: 0.3em;
+}
+
+h3-class, h4-class, h5-class, h6-class {
+  font-size: 1.5em;
+}
+
+.paragraph-class {
+  margin-bottom: 1em;
+  text-align: justify;
+  color: #444;
+}
+
+/* Image styling */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px 0;
+}
+
+/* Link styling */
+a {
+  color: #1a0dab;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* List styling */
+ul, ol {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+/* Blockquote styling */
+blockquote {
+  border-left: 3px solid #0a1e39;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  background-color: #e9ecef;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote:before {
+  color: #0a1e39;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 10px;
+  vertical-align: -0.4em;
+}
+
+blockquote p {
+  display: inline;
+}
+
+/* Code styling */
+code {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #e9ecef;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+ul li, ol li {
+  color: black;
+}
+
+.et_pb_image .et_pb_image_wrap {
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+}
+
+/* This is to disable thumbnail only on posts and not homepage */
+body.single .et_pb_image .et_pb_image_wrap {
+  display: none;
+}
+
+.et_pb_text>b {
+  color: black !important;
+}
+
+.et_pb_text>p {
+  color: black !important;
+}
+
+
+.et_pb_text_inner {
+  padding: 20px; /* Add padding for spacing inside the container */
+  border-radius: 5px; /* Rounded corners for the container */
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth background color and transform transition */
+  margin: 0 20px; /* Add margin from both sides for spacing */
+  margin-top: -11%;
+}
+
+
+.et_pb_text_inner ul,
+.et_pb_text_inner ol {
+    list-style-type: none; /* Remove default list bullets */
+    padding-left: 0; /* Remove default list padding */
+    margin-left: 20px; /* Indent the lists to the right */
+}
+
+.et_pb_text_inner ul li::before,
+.et_pb_text_inner ol li::before {
+    content: "\2022"; /* Use a bullet point character as the list marker */
+    color: #DFBD62; /* Set the color for the bullet */
+    display: inline-block;
+}
+
+.et_pb_button {
+  margin-left: 40px;
+}
+
+.spp-timestamp {
+  color: #8f7c37; /* Set the initial color to #DFBD62 */
+  text-decoration: none; /* Remove the default underline for links */
+  transition: color 0.3s ease-in-out; /* Smooth color transition on hover */
+}
+
+.spp-timestamp:hover {
+  color: black; /* Change to a slightly darker shade on hover */ 
+}
+
+.et_pb_text_inner u {
+  color: #8f7c37;
+}
+
+.et_pb_column .et_pb_column_4_4 .et_pb_column_3 {
+  display: none;
 }

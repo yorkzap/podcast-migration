@@ -68,7 +68,7 @@ Version: 1.0.0
 
 .podcast-divider {
     height: 2px;
-    background: #FFD700;
+    background: #E0BD63;
     width: 3rem;
     margin: 1rem auto;
     border-radius: 1px;
@@ -316,14 +316,14 @@ Version: 1.0.0
 
 .podcast-divider {
     height: 3px; /* Slightly thicker for emphasis */
-    background: #FFD700;
+    background: #E0BD63;
     width: 60px; /* Longer to stand out more */
     margin: 20px auto; /* More whitespace around the divider */
     border-radius: 1px;
 }
 
 .podcast-listen-button {
-    background-color: #FFD700;
+    background-color: #E0BD63;
     color: #0A1E39;
     padding: 10px 25px; /* Slightly reduced for balance */
     border-radius: 25px;
@@ -373,7 +373,7 @@ Version: 1.0.0
 }
 
 .podcast-divider {
-    background: #FFD700; /* Solid color for clarity */
+    background: #E0BD63; /* Solid color for clarity */
     width: 50px; /* Short and wide for a modern look */
     height: 4px; /* Thicker for visibility */
     margin-bottom: 24px; /* More space to the title */
@@ -490,7 +490,7 @@ body, h1, .next-text {
 }
 
 .podcast-title {
-  background-color: rgba(255, 215, 0, 0.85); /* Semi-transparent yellow */
+  background-color: rgba(224, 189, 99, 0.85); /* Semi-transparent yellow */
   padding: 1.5rem;
   border-radius: 4px;
   font-size: 4rem;
@@ -502,6 +502,10 @@ body, h1, .next-text {
   display: block; /* Use block to utilize the full width of header-text */
   margin-top: 4rem; /* Adjust the top margin */
   margin-bottom: 1rem; /* Space between the title and the host */
+  
+  /* Frosted glass effect */
+  backdrop-filter: blur(10px); /* Blurring the background */
+  -webkit-backdrop-filter: blur(10px); /* For Safari browser compatibility */
 }
 
 
@@ -559,7 +563,7 @@ body, h1, .next-text {
   transform: translate(-50%, -50%);
   padding: 20px 40px; /* More horizontal padding for a wider appearance */
   position: absolute; /* Absolute position for the header text */
-  background-color: #E0BE63; /* Solid yellow background */
+  background-color: #E0BD63; /* Solid yellow background */
   z-index: 2; /* Ensure it's above the image */
   border-radius: 50px;
 }
@@ -875,8 +879,113 @@ body, h1, h2, h3, p {
 }
 
 /* Additional styles for a clean look */
-.divider {
-    height: 1px;
-    background-color: #e1e4e8; /* Subtle divider color */
-    margin: 20px 0;
+/* Base style for the post content area with a MacOS inspired aesthetic */
+.post-body-content {
+  max-width: 75%; /* Increased width for a broader content area */
+  margin: -4rem auto 3rem; /* Negative margin for a smooth overlap */
+  padding: 60px; /* Increased padding for additional whitespace */
+  background: #ffffff; /* Clean white background */
+  border-radius: 12px; /* Subtle rounded corners */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05); /* Soft shadow for depth, akin to macOS */
+  font-family: 'San Francisco', 'Helvetica Neue', Arial, sans-serif; /* System font for macOS */
+  color: #1a1a1a; /* Soft black for legibility */
+  line-height: 1.6; /* Optimal line height for reading */
+  overflow: hidden; /* Clipping anything outside the border-radius */
+  opacity: 0; /* Initial state - content is invisible */
+  transform: translateY(30px); /* Start slightly lower for the animation */
+  animation: fadeInUp 0.8s ease forwards 0.3s; /* Animation to fade in and slide up */
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Style for main headings to stand out */
+.post-body-content .main-heading {
+  font-size: 2.5rem; /* Increased font size for more prominence */
+  color: #0A1E39; /* A classic MacOS vibrant blue */
+  margin-top: 0; /* Aligning top with the content padding */
+  margin-bottom: 2rem; /* 32px for a clear separation from content */
+  font-weight: bold; /* Bold to stand out */
+  text-align: center; /* Centered for importance */
+  letter-spacing: 0.5px; /* Slight spacing for an airy feel */
+  line-height: 1.2; /* Decreased line height to prevent vertical scrolling */
+  background: inherit;
+}
+
+/* Subtle style for subheadings, keeping in theme with MacOS design */
+.post-body-content .sub-sub-heading {
+  font-size: 1.75rem; /* Increased font size for subheadings */
+  color: #3e4a59; /* Darker grey for subtlety */
+  margin-top: 2rem; /* Increased top margin for rhythm */
+  margin-bottom: 1rem; /* Sufficient space below for separation */
+  font-weight: normal; /* Not too bold to differentiate from the main heading */
+  text-align: left; /* Left align for a clean start of sections */
+  border-bottom: 2px solid #dce3eb; /* Light border for a division, typical in macOS */
+  padding-bottom: 0.5rem; /* 8px padding for space above the border */
+}
+
+/* Paragraphs styled for easy reading, reflecting MacOS's emphasis on user experience */
+.post-body-content .blog-paragraph {
+  font-size: 1rem; /* 16px for comfort */
+  margin-bottom: 1.5rem; /* 24px for clean separation between paragraphs */
+  text-align: left; /* Left-aligned for consistency and ease of reading */
+}
+
+/* Responsive design for a seamless transition between devices */
+@media (max-width: 768px) {
+  .post-body-content {
+    max-width: 90%; /* Full width with a little margin */
+    padding: 30px; /* Reduced padding on smaller screens */
+    margin: 40px auto; /* Less vertical margin on smaller devices */
+    animation: none; /* No animation on smaller screens */
+  }
+  
+  .post-body-content .main-heading,
+  .post-body-content .sub-sub-heading {
+    text-align: center; /* Centered text on smaller screens for balance */
+  }
+}
+
+.podcast-series {
+  font-size: 1.5rem;
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+  .post-body-content {
+    max-width: 100%; /* Full width for mobile screens */
+    margin: 1rem auto; /* Top and bottom margin for spacing */
+    padding: 20px; /* Slightly less padding for space efficiency */
+    box-shadow: none; /* Remove shadow for a flatter design */
+    animation: none; /* No animation to keep it simple */
+    transform: none; /* No transform to prevent movement */
+    opacity: 1; /* Content is fully visible */
+  }
+
+  .post-body-content .main-heading,
+  .post-body-content .sub-sub-heading,
+  .post-body-content .blog-paragraph {
+    text-align: left; /* Align text to the left for simplicity */
+    margin-top: 1rem; /* Uniform top margin for spacing */
+    margin-bottom: 1rem; /* Uniform bottom margin for spacing */
+    font-size: 1rem; /* Standard font size for mobile legibility */
+    line-height: 1.4; /* Slightly tighter line-height for mobile screens */
+    border-bottom: none; /* Remove borders from subheadings */
+    padding-bottom: 0; /* Remove padding from subheadings */
+  }
+
+  /* Ensure headings are not too large on small screens */
+  .post-body-content .main-heading {
+    font-size: 1.5rem; /* Smaller font size for main headings */
+    margin-bottom: 1.5rem; /* Spacing after the main heading */
+  }
+
+  .post-body-content .sub-sub-heading {
+    font-size: 1.25rem; /* Smaller font size for subheadings */
+  }
 }
